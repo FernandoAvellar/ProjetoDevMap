@@ -12,8 +12,8 @@ module.exports = {
 
     async store(request, response) {
         const { github_username, techs, latitude, longitude } = request.body;
-        let dev = await Dev.findOne({ github_username });
 
+        let dev = await Dev.findOne({ github_username });
         if (!dev) {
             const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
             const { name = login, avatar_url, bio } = apiResponse.data;
@@ -34,5 +34,17 @@ module.exports = {
         }
 
         return response.json(dev);
+    },
+
+    async delete(request, response) {
+        const { github_username } = request.query;
+        const isDevExist = await Dev.findOne({ github_username });
+        if (isDevExist) {
+            await Dev.deleteOne({
+                github_username: github_username,
+            });
+            return response.json({ Result: `User ${github_username} deleted` });
+        }
+        return response.json({ Result: `User ${github_username} not found in database!` });
     }
 };
