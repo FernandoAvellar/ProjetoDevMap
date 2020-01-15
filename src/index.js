@@ -11,10 +11,12 @@ const routes = require('./routes');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://fernando:rR5zb1TFPOlI1y7h@cluster0-pweit.mongodb.net/week10?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect('mongodb+srv://fernando:fernando@cluster0-pweit.mongodb.net/week10?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    });
 
 app.use(express.json()); // Falando pro express entender Json inclusive o routes que está abaixo
 app.use(routes);
