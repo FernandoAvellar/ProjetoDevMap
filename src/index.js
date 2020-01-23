@@ -6,6 +6,7 @@
 // Body: request.body (Dados para criação ou alteração de um registro)
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 
@@ -18,6 +19,7 @@ mongoose.connect('mongodb+srv://fernando:fernando@cluster0-pweit.mongodb.net/wee
         useCreateIndex: true,
     });
 
+    app.use(cors()); //Liberando acesso para todos os domínios
 app.use(express.json()); // Falando pro express entender Json inclusive o routes que está abaixo
 app.use(routes);
 app.listen(8080);
