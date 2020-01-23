@@ -31,6 +31,8 @@ module.exports = {
                 techs: techsArray,
                 location,
             });
+
+            response.status(201);
         }
 
         return response.json(dev);
